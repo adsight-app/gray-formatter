@@ -233,5 +233,5 @@ def fix_brace(
         del tokens[i - 1]
     elif tokens[i].name == 'UNIMPORTANT_WS' and tokens[i - 1].name == 'NL' and tokens[i - 2].src == ',':
         del tokens[i - 2]
-    else:
-        print([f'{t.name}({t.src})' for t in tokens[first_brace:last_brace]])
+    # else:
+    #     print([f'{t.name}({t.src})' for t in tokens[first_brace:last_brace]])
