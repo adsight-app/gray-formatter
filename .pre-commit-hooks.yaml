@@ -1,6 +1,6 @@
--   id: remove-trailing-comma
-    name: Remove trailing commas
-    description: Automatically remove trailing commas from calls and literals.
-    entry: remove-trailing-comma
+-   id: gray-formatter
+    name: Format code with deopinionated black
+    description: Format code with black, but remove trailing commas and replace double quotes with single quotes
+    entry: gray-formatter
     language: python
     types: [python]

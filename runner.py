@@ -1,5 +1,16 @@
-from remove_trailing_comma._main import _fix_src
+from gray_formatter._main import main
 
-with open("test.py", "r") as f:
-    content = f.read()
-    print(_fix_src(content))
+def get_content():
+    with open("test.py", "r") as f:
+        content = f.read()
+    return content
+
+content = get_content()
+try:
+    main(("test.py",))
+    print(get_content())
+except Exception as e:
+    raise e
+finally:
+    with open("test.py", "w") as f:
+        f.write(content)

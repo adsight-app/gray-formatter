@@ -91,15 +91,14 @@ def set_settings() -> VisualSettingsWrapper:
 
     if 'NewBannerImage' in data:
         settings['BannerURL'] = upload_b64_image(
-            data['NewBannerImage']['Format'],
-            data['NewBannerImage']['Content'],
-            'ggformBanners',
+        data['NewBannerImage']['Format'],
+        data['NewBannerImage']['Content'],
+        'ggformBanners',
         )
 
     if 'NewBannerURL' in data:
         settings['BannerURL'] = upload_image_from_url(
-            data['NewBannerURL'], 'ggformBanners'
-        )
+        data['NewBannerURL'], 'ggformBanners')
 
     result = db_settings.set_settings(request.args['ChannelID'], settings)
 
@@ -110,4 +109,4 @@ def set_settings() -> VisualSettingsWrapper:
 
 @r.route('/', methods=['GET'])
 def get_settings() -> VisualSettingsWrapper:
-    return db_settings.get_settings(request.args['ChannelID'])
+    return db_settings.get_settings(request.args["ChannelID"])

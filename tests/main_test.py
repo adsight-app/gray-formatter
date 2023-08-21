@@ -4,7 +4,7 @@ import io
 import sys
 from unittest import mock
 
-from remove_trailing_comma._main import main
+from gray_formatter._main import main
 
 
 def test_main_trivial():

@@ -14,7 +14,7 @@ from typing import TypeVar
 from tokenize_rt import Offset
 from tokenize_rt import Token
 
-from remove_trailing_comma import _plugins
+from gray_formatter import _plugins
 
 
 class State(NamedTuple):

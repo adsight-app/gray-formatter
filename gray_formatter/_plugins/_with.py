@@ -7,12 +7,12 @@ from typing import Iterable
 from tokenize_rt import Offset
 from tokenize_rt import Token
 
-from remove_trailing_comma._ast_helpers import ast_to_offset
-from remove_trailing_comma._data import register
-from remove_trailing_comma._data import State
-from remove_trailing_comma._data import TokenFunc
-from remove_trailing_comma._token_helpers import find_simple
-from remove_trailing_comma._token_helpers import fix_brace
+from gray_formatter._ast_helpers import ast_to_offset
+from gray_formatter._data import register
+from gray_formatter._data import State
+from gray_formatter._data import TokenFunc
+from gray_formatter._token_helpers import find_simple
+from gray_formatter._token_helpers import fix_brace
 
 
 if sys.version_info >= (3, 9):  # pragma: >=3.9 cover

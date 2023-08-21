@@ -4,17 +4,19 @@ import argparse
 import sys
 from typing import Iterable
 from typing import Sequence
+import black
 
 from tokenize_rt import src_to_tokens
 from tokenize_rt import Token
 from tokenize_rt import tokens_to_src
 
-from remove_trailing_comma._ast_helpers import ast_parse
-from remove_trailing_comma._data import FUNCS
-from remove_trailing_comma._data import visit
-from remove_trailing_comma._token_helpers import find_simple
-from remove_trailing_comma._token_helpers import fix_brace
-from remove_trailing_comma._token_helpers import START_BRACES
+from gray_formatter._ast_helpers import ast_parse
+from gray_formatter._data import FUNCS
+from gray_formatter._data import visit
+from gray_formatter._token_helpers import find_simple
+from gray_formatter._token_helpers import fix_brace
+from gray_formatter._token_helpers import START_BRACES
+import gray_formatter.quotes_rewriter as quotes_rewriter
 
 
 def _changing_list(lst: list[Token]) -> Iterable[tuple[int, Token]]:
@@ -57,6 +59,7 @@ def fix_file(filename: str, args: argparse.Namespace) -> int:
     if filename == '-':
         contents_bytes = sys.stdin.buffer.read()
     else:
+        print(filename)
         with open(filename, 'rb') as fb:
             contents_bytes = fb.read()
 
@@ -67,6 +70,8 @@ def fix_file(filename: str, args: argparse.Namespace) -> int:
         print(msg, file=sys.stderr)
         return 1
 
+    contents_text = black.format_str(contents_text, mode=black.FileMode())
+    contents_text = quotes_rewriter.QuoteRewriter(contents_text).rewrite()
     contents_text = _fix_src(contents_text)
 
     if filename == '-':
