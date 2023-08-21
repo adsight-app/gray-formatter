@@ -9,12 +9,12 @@ from tokenize_rt import src_to_tokens
 from tokenize_rt import Token
 from tokenize_rt import tokens_to_src
 
-from add_trailing_comma._ast_helpers import ast_parse
-from add_trailing_comma._data import FUNCS
-from add_trailing_comma._data import visit
-from add_trailing_comma._token_helpers import find_simple
-from add_trailing_comma._token_helpers import fix_brace
-from add_trailing_comma._token_helpers import START_BRACES
+from remove_trailing_comma._ast_helpers import ast_parse
+from remove_trailing_comma._data import FUNCS
+from remove_trailing_comma._data import visit
+from remove_trailing_comma._token_helpers import find_simple
+from remove_trailing_comma._token_helpers import fix_brace
+from remove_trailing_comma._token_helpers import START_BRACES
 
 
 def _changing_list(lst: list[Token]) -> Iterable[tuple[int, Token]]:

@@ -110,7 +110,7 @@ def find_call(
     return find_simple(first_brace, tokens)
 
 
-def fix_brace(
+def _fix_brace(
         tokens: list[Token],
         fix_data: Fix | None,
         add_comma: bool,
@@ -210,3 +210,28 @@ def fix_brace(
         if remove_comma and tokens[start - 1].src == ',':
             start -= 1
         del tokens[start:last_brace]
+
+
+def fix_brace(
+        tokens: list[Token],
+        fix_data: Fix | None,
+        add_comma: bool,
+        remove_comma: bool,
+) -> None:
+    if not remove_comma:
+        return
+    
+    if fix_data is None:
+        return
+    
+    first_brace, last_brace = fix_data.braces
+
+    i = last_brace - 1
+    if tokens[i].src == ',':
+        del tokens[i]
+    elif tokens[i].name == 'NL' and tokens[i - 1].src == ',':
+        del tokens[i - 1]
+    elif tokens[i].name == 'UNIMPORTANT_WS' and tokens[i - 1].name == 'NL' and tokens[i - 2].src == ',':
+        del tokens[i - 2]
+    else:
+        print([f'{t.name}({t.src})' for t in tokens[first_brace:last_brace]])

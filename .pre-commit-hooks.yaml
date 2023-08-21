@@ -1,6 +1,6 @@
--   id: add-trailing-comma
-    name: Add trailing commas
-    description: Automatically add trailing commas to calls and literals.
-    entry: add-trailing-comma
+-   id: remove-trailing-comma
+    name: Remove trailing commas
+    description: Automatically remove trailing commas from calls and literals.
+    entry: remove-trailing-comma
     language: python
     types: [python]
