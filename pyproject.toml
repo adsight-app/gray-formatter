@@ -1,10 +1,12 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.0", "black", "tokenize-rt>=3.0.1",
+    "black >= 23.7.0",
+    "asttokens >= 2.2.1"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "gray_formatter"
-version = "3.0.6"
+version = "3.0.7"
 authors = [
   { name="Yegor Pokrovskiy", email="procratstinator@proton.me" },
 ]

@@ -26,7 +26,10 @@ def _changing_list(lst: list[Token]) -> Iterable[tuple[int, Token]]:
         i += 1
 
 
-def _fix_src(contents_text: str) -> str:
+def fix_content(contents_text: str) -> str:
+    contents_text = black.format_str(contents_text, mode=black.FileMode())
+    contents_text = quotes_rewriter.QuoteRewriter(contents_text).rewrite()
+
     try:
         ast_obj = ast_parse(contents_text)
     except SyntaxError:
@@ -70,9 +73,7 @@ def fix_file(filename: str, args: argparse.Namespace) -> int:
         print(msg, file=sys.stderr)
         return 1
 
-    contents_text = black.format_str(contents_text, mode=black.FileMode())
-    contents_text = quotes_rewriter.QuoteRewriter(contents_text).rewrite()
-    contents_text = _fix_src(contents_text)
+    contents_text = fix_content(contents_text)
 
     if filename == '-':
         print(contents_text, end='')
