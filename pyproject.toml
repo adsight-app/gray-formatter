@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gray_formatter"
-version = "3.0.7"
+version = "3.0.8"
 authors = [
   { name="Yegor Pokrovskiy", email="procratstinator@proton.me" },
 ]

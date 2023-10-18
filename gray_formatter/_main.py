@@ -27,7 +27,7 @@ def _changing_list(lst: list[Token]) -> Iterable[tuple[int, Token]]:
 
 
 def fix_content(contents_text: str) -> str:
-    contents_text = black.format_str(contents_text, mode=black.FileMode())
+    contents_text = black.format_str(contents_text, mode=black.FileMode(magic_trailing_comma=False))
     contents_text = quotes_rewriter.QuoteRewriter(contents_text).rewrite()
 
     try:
