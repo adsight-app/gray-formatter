@@ -27,7 +27,10 @@ def _changing_list(lst: list[Token]) -> Iterable[tuple[int, Token]]:
 
 
 def fix_content(contents_text: str) -> str:
-    contents_text = black.format_str(contents_text, mode=black.FileMode(magic_trailing_comma=False))
+    contents_text = black.format_str(
+        contents_text,
+        mode=black.FileMode(magic_trailing_comma=False, string_normalization=False)
+    )
     contents_text = quotes_rewriter.QuoteRewriter(contents_text).rewrite()
 
     try:
@@ -50,9 +53,7 @@ def fix_content(contents_text: str) -> str:
 
         if token.name == 'OP' and token.src in START_BRACES:
             fix_brace(
-                tokens, find_simple(i, tokens),
-                add_comma=False,
-                remove_comma=False,
+                tokens, find_simple(i, tokens), add_comma=False, remove_comma=False
             )
 
     return tokens_to_src(tokens)
@@ -69,7 +70,7 @@ def fix_file(filename: str, args: argparse.Namespace) -> int:
     try:
         contents_text_orig = contents_text = contents_bytes.decode()
     except UnicodeDecodeError:
-        msg = f'{filename} is non-utf-8 (not supported)'
+        msg = f"{filename} is non-utf-8 (not supported)"
         print(msg, file=sys.stderr)
         return 1
 
@@ -78,7 +79,7 @@ def fix_file(filename: str, args: argparse.Namespace) -> int:
     if filename == '-':
         print(contents_text, end='')
     elif contents_text != contents_text_orig:
-        print(f'Rewriting {filename}', file=sys.stderr)
+        print(f"Rewriting {filename}", file=sys.stderr)
         with open(filename, 'wb') as f:
             f.write(contents_text.encode())
 
